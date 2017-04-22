@@ -31,16 +31,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.cs" />
+    <Compile Include="Data\DataProvider.cs" />
+    <Compile Include="Data\TreeParser.cs" />
+    <Compile Include="System.Collections\TreeNodeTest.cs" />
+    <Compile Include="System.Collections\TreeNodeCollectionTest.cs" />
+    <Compile Include="System.Collections.Generic\TreeNodeTest.cs" />
+    <Compile Include="System.Collections.Generic\TreeNodeCollectionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Assets\input.txt" />
+    <None Include="Assets\output.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tree\Tree.csproj">
       <Project>{6CFB7491-A977-4834-8FDB-1EE393798ABB}</Project>
       <Name>Tree</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
+    <Folder Include="Data\" />
+    <Folder Include="System.Collections\" />
+    <Folder Include="System.Collections.Generic\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
