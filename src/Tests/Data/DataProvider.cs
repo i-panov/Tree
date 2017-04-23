@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Tree.Data
+namespace Tests.Data
 {
 	class DataProvider
 	{
-		public const string InputFilename = "Assets/input.txt";
+		public const string InputFilename = "../../Assets/input.txt";
 
-		public const string OutputFilename = "Assets/output.txt";
+		public const string OutputFilename = "../../Assets/output.txt";
 
-		public string Input => File.ReadAllText(InputFilename);
+		public string Input { get; } = File.ReadAllText(InputFilename);
 
 		public string Output
 		{

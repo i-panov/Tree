@@ -6,10 +6,10 @@ using System.Linq;
 using NUnit.Framework;
 
 
-namespace Tests.System.Collections.Generic
+namespace Tests.Data
 {
 	[TestFixture]
-	public class TreeNodeTest
+	public class TreeParserTest
 	{
 		[Test]
 		public void Test()

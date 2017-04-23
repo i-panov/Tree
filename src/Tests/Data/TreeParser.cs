@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Tree.Data
+namespace Tests.Data
 {
 	static class TreeParser
 	{

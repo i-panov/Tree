@@ -33,10 +33,12 @@
   <ItemGroup>
     <Compile Include="Data\DataProvider.cs" />
     <Compile Include="Data\TreeParser.cs" />
-    <Compile Include="System.Collections\TreeNodeTest.cs" />
-    <Compile Include="System.Collections\TreeNodeCollectionTest.cs" />
-    <Compile Include="System.Collections.Generic\TreeNodeTest.cs" />
-    <Compile Include="System.Collections.Generic\TreeNodeCollectionTest.cs" />
+    <Compile Include="Tests\System.Collections\TreeNodeCollectionTest.cs" />
+    <Compile Include="Tests\System.Collections\TreeNodeTest.cs" />
+    <Compile Include="Tests\System.Collections.Generic\TreeNodeCollectionTest.cs" />
+    <Compile Include="Tests\System.Collections.Generic\TreeNodeTest.cs" />
+    <Compile Include="Tests\Data\DataProviderTest.cs" />
+    <Compile Include="Tests\Data\TreeParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -52,8 +54,10 @@
   <ItemGroup>
     <Folder Include="Assets\" />
     <Folder Include="Data\" />
-    <Folder Include="System.Collections\" />
-    <Folder Include="System.Collections.Generic\" />
+    <Folder Include="Tests\" />
+    <Folder Include="Tests\System.Collections\" />
+    <Folder Include="Tests\System.Collections.Generic\" />
+    <Folder Include="Tests\Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
