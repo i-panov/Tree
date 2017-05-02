@@ -11,10 +11,5 @@ namespace Tests.System.Collections
 	[TestFixture]
 	public class TreeNodeTest
 	{
-		[Test]
-		public void Test()
-		{
-			Assert.AreEqual(1, 2);
-		}
 	}
 }

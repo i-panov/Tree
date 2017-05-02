@@ -29,17 +29,17 @@ namespace System.Collections
 		/// <value>Дочерние элементы</value>
 		public TreeNodeCollection Children { get; } = new TreeNodeCollection();
 
-		/// <summary>
-		/// Возвращает предыдущий одноуровневый элемент узла дерева.
-		/// </summary>
-		/// <value>Предыдущий узел</value>
-		public TreeNode PrevNode { get; }
+	    /// <summary>
+	    /// Возвращает предыдущий одноуровневый элемент узла дерева.
+	    /// </summary>
+	    /// <value>Предыдущий узел</value>
+	    public TreeNode PrevNode => Index - 1 >= 0 ? Parent.Children[Index - 1] : null;
 
-		/// <summary>
-		/// Возвращает следующий одноуровневый элемент узла дерева.
-		/// </summary>
-		/// <value>Следующий узел</value>
-		public TreeNode NextNode { get; }
+	    /// <summary>
+	    /// Возвращает следующий одноуровневый элемент узла дерева.
+	    /// </summary>
+	    /// <value>Следующий узел</value>
+	    public TreeNode NextNode => Index + 1 < Parent.Children.Count ? Parent.Children[Index + 1] : null;
 
 		/// <summary>
 		/// Возвращает значение, указывающее является ли узел корневым.
@@ -57,8 +57,11 @@ namespace System.Collections
 		/// Возвращает отсчитываемую от нуля глубину узла дерева.
 		/// </summary>
 		/// <value>Глубина</value>
-		public int Level { get; internal set; }
+		public int Level { get; private set; }
 
+        /// <summary>
+        /// Возвращает всех родителей узла.
+        /// </summary>
 		public IEnumerable<TreeNode> AllParents
 		{
 			get
@@ -73,9 +76,20 @@ namespace System.Collections
 			}
 		}
 
+	    internal void SetParent(TreeNode node)
+	    {
+	        Parent = node;
+	        Level = node?.Level + 1 ?? 0;
+	    }
+
 		public TreeNode()
 		{
 			Children.Parent = this;
 		}
+
+	    public TreeNode(object value) : this()
+	    {
+	        Value = value;
+	    }
 	}
 }

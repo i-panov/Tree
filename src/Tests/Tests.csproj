@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -39,6 +39,7 @@
     <Compile Include="Tests\System.Collections.Generic\TreeNodeTest.cs" />
     <Compile Include="Tests\Data\DataProviderTest.cs" />
     <Compile Include="Tests\Data\TreeParserTest.cs" />
+    <Compile Include="Tests\System.Linq\EnumerableExtensionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -51,13 +52,6 @@
       <Name>Tree</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\" />
-    <Folder Include="Data\" />
-    <Folder Include="Tests\" />
-    <Folder Include="Tests\System.Collections\" />
-    <Folder Include="Tests\System.Collections.Generic\" />
-    <Folder Include="Tests\Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
