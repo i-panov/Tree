@@ -17,20 +17,20 @@ namespace Tests.System.Linq
         [Test]
         public void ToEnumerableTest()
         {
-            var tree = new TreeNodeCollection()
+            var tree = new TreeNodeCollection<string>
             {
-                new TreeNode
+                new TreeNode<string>
                 {
                     Value = "1",
                     Children =
                     {
-                        new TreeNode("1.1"),
-                        new TreeNode("1.2")
+                        new TreeNode<string>("1.1"),
+                        new TreeNode<string>("1.2")
                     }
                 }
             };
 
-            var values = tree.ToEnumerable(x => x.Value).Cast<object>().ToArray();
+            var values = tree.ToEnumerable<string>(x => x.Value).ToArray();
 
             Assert.AreEqual(3, values.Length);
             Assert.AreEqual("1", values[0]);
@@ -42,8 +42,8 @@ namespace Tests.System.Linq
         public void ToTreeTest()
         {
             var lines = data.Input.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            Func<object, int> getLevel = line => ((string)line).TakeWhile(char.IsWhiteSpace).Count();
-            Func<object, int, object> itemSelector = (line, level) => new string(((string)line).SkipWhile(char.IsWhiteSpace).ToArray());
+            Func<string, int> getLevel = line => line.TakeWhile(char.IsWhiteSpace).Count();
+            Func<string, int, string> itemSelector = (line, level) => new string(line.SkipWhile(char.IsWhiteSpace).ToArray());
             var tree = lines.ToTree(getLevel, itemSelector);
 
             Assert.AreEqual(4, tree.Count);
@@ -52,8 +52,8 @@ namespace Tests.System.Linq
             Assert.AreEqual("1.1.1", tree[0].Children[0].Children[0].Value);
             Assert.AreEqual("3.1", tree[2].Children[0].Value);
 
-            Func<TreeNode, string> nodeToLine = x => new string('\t', x.Level) + x.Value;
-            var outputLines = tree.ToEnumerable(nodeToLine).Cast<string>().ToArray();
+            Func<TreeNode<string>, string> nodeToLine = x => new string('\t', x.Level) + x.Value;
+            var outputLines = tree.ToEnumerable(nodeToLine).ToArray();
             data.Output = string.Join(Environment.NewLine, outputLines);
 
             Assert.IsTrue(lines.SequenceEqual(outputLines));

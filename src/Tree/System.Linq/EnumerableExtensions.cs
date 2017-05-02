@@ -9,7 +9,7 @@ namespace System.Linq
 {
     public static class EnumerableExtensions
     {
-        private static IEnumerable<TreeNode> GetFlatten(TreeNodeCollection nodes)
+        private static IEnumerable<TreeNode<T>> GetFlatten<T>(TreeNodeCollection<T> nodes)
         {
             foreach (var node in nodes)
             {
@@ -20,34 +20,31 @@ namespace System.Linq
             }
         }
 
-        public static IEnumerable ToEnumerable(this TreeNodeCollection nodes, Func<TreeNode, object> selector)
+        public static IEnumerable<T> ToEnumerable<T>(this TreeNodeCollection<T> nodes, Func<TreeNode<T>, T> selector)
             => GetFlatten(nodes).Select(selector);
 
-        /*public static IEnumerable<T> ToEnumerable<T>(this TreeNodeCollection<T> nodes, Func<TreeNode<T>, T> selector)
-            => ToEnumerable(nodes.ToTree(), x => selector((TreeNode)x));*/
-
-        private static TreeNodeCollection GetNodesByLevel(int level, TreeNodeCollection nodes)
+        private static TreeNodeCollection<T> GetNodesByLevel<T>(int level, TreeNodeCollection<T> nodes)
         {
             if (nodes.Level == level)
                 return nodes;
 
             if (nodes.Count == 0)
-                nodes.Add(new TreeNode());
+                nodes.Add(new TreeNode<T>());
 
             var lastNode = nodes[nodes.Count - 1];
 
             return GetNodesByLevel(level, lastNode.Children);
         }
 
-        public static TreeNodeCollection ToTree(this IEnumerable values, Func<object, int> getLevel, Func<object, int, object> selector)
+        public static TreeNodeCollection<T2> ToTree<T1, T2>(this IEnumerable<T1> items, Func<T1, int> getLevel, Func<T1, int, T2> selector)
         {
-            var result = new TreeNodeCollection();
+            var result = new TreeNodeCollection<T2>();
 
-            foreach (var value in values)
+            foreach (var value in items)
             {
                 var level = getLevel(value);
                 var convertedValue = selector?.Invoke(value, level) ?? value;
-                var node = new TreeNode(convertedValue);
+                var node = new TreeNode<T2>(convertedValue);
                 var nodesByLevel = GetNodesByLevel(level, result);
 
                 nodesByLevel?.Add(node);
@@ -55,18 +52,5 @@ namespace System.Linq
 
             return result;
         }
-
-        /*public static TreeNodeCollection<T> ToTree<T>(this TreeNodeCollection nodes)
-        {
-            return null;
-        }
-
-        public static TreeNodeCollection ToTree<T>(this TreeNodeCollection<T> nodes)
-        {
-            return null;
-        }
-
-        public static TreeNodeCollection<T> ToTree<T>(this IEnumerable<T> values, Func<T, int> getLevel, Func<T, int, object> selector)
-            => ToTree((IEnumerable)values, x => getLevel((T)x), (x, l) => selector((T)x, l)).ToTree<T>();*/
     }
 }

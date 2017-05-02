@@ -39,6 +39,9 @@ Thumbs.db
 # dotCover
 *.dotCover
 
+# rider
+src/.idea
+
 # Sources
 src/packages/
 src/Tree/bin/

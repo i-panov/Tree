@@ -15,7 +15,7 @@ namespace System.Collections.Generic
 		/// Возвращает значение узла.
 		/// </summary>
 		/// <value>Значение</value>
-		public object Value { get; set; }
+		public T Value { get; set; }
 
         /// <summary>
         /// Возвращает родительский узел дерева для текущего узла дерева.
@@ -87,7 +87,7 @@ namespace System.Collections.Generic
             Children.Parent = this;
         }
 
-        public TreeNode(object value) : this()
+        public TreeNode(T value) : this()
         {
             Value = value;
         }
