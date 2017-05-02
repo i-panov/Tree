@@ -43,7 +43,7 @@ namespace Tests.System.Linq
         {
             var lines = data.Input.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             Func<object, int> getLevel = line => ((string)line).TakeWhile(char.IsWhiteSpace).Count();
-            Func<object, object> itemSelector = line => new string(((string)line).SkipWhile(char.IsWhiteSpace).ToArray());
+            Func<object, int, object> itemSelector = (line, level) => new string(((string)line).SkipWhile(char.IsWhiteSpace).ToArray());
             var tree = lines.ToTree(getLevel, itemSelector);
 
             Assert.AreEqual(4, tree.Count);
