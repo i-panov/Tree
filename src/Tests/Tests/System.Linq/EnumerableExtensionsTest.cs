@@ -12,7 +12,7 @@ namespace Tests.System.Linq
     [TestFixture]
     public class EnumerableExtensionsTest
     {
-        private DataProvider data = new DataProvider();
+        private readonly DataProvider data = new DataProvider();
 
         [Test]
         public void ToEnumerableTest()
