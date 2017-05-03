@@ -38,7 +38,7 @@ namespace System.Collections.Generic
 
             set
             {
-                _nodes[index].Parent = null;
+                _nodes[index].SetParent(null);
                 value.SetParent(Parent);
                 value.Index = index;
                 _nodes[index] = value;
@@ -55,6 +55,7 @@ namespace System.Collections.Generic
             value.Parent?.Children.Remove(value);
             value.SetParent(Parent);
             value.Index = index;
+            _nodes.Skip(index).ForEach((x, i) => x.Index++);
             _nodes.Insert(index, value);
         }
 
@@ -76,12 +77,13 @@ namespace System.Collections.Generic
         /// <param name="index"></param>
 		public bool Remove(TreeNode<T> value)
         {
-            var result = _nodes.Remove(value);
+            var index = _nodes.IndexOf(value);
 
-            if (result)
-                value.SetParent(null);
+            if (index == -1)
+                return false;
 
-            return result;
+            RemoveAt(index);
+            return true;
         }
 
         /// <summary>
@@ -91,6 +93,7 @@ namespace System.Collections.Generic
 		public void RemoveAt(int index)
         {
             _nodes[index].SetParent(null);
+            _nodes.Skip(index + 1).ForEach((x, i) => x.Index--);
             _nodes.RemoveAt(index);
         }
 
