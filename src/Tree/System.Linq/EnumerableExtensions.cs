@@ -71,5 +71,36 @@ namespace System.Linq
 
             return result;
         }
+
+        /// <summary>
+        /// Перечисляет элементы с индексами.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public static IEnumerable<KeyValuePair<int, T>> Enumerate<T>(this IEnumerable<T> items)
+        {
+            var index = 0;
+
+            foreach (var item in items)
+            {
+                yield return new KeyValuePair<int, T>(index++, item);
+            }
+        }
+
+        /// <summary>
+        /// Применяет к каждому элементу функцию callback,
+        /// передав в нее сам элемент и его индекс.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items"></param>
+        /// <param name="callback"></param>
+        public static void ForEach<T>(this IEnumerable<T> items, Action<T, int> callback)
+        {
+            foreach (var pair in items.Enumerate())
+            {
+                callback(pair.Value, pair.Key);
+            }
+        }
     }
 }
