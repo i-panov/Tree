@@ -33,8 +33,6 @@
   <ItemGroup>
     <Compile Include="Data\DataProvider.cs" />
     <Compile Include="Data\TreeParser.cs" />
-    <Compile Include="Tests\System.Collections\TreeNodeCollectionTest.cs" />
-    <Compile Include="Tests\System.Collections\TreeNodeTest.cs" />
     <Compile Include="Tests\System.Collections.Generic\TreeNodeCollectionTest.cs" />
     <Compile Include="Tests\System.Collections.Generic\TreeNodeTest.cs" />
     <Compile Include="Tests\Data\DataProviderTest.cs" />

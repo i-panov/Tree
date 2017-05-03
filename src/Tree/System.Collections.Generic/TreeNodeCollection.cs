@@ -15,7 +15,7 @@ namespace System.Collections.Generic
         public int Level => Parent?.Level + 1 ?? 0;
 
         /// <summary>
-        /// Возвращает общее число TreeNode<T> объектов в коллекции.
+        /// Возвращает общее число TreeNode объектов в коллекции.
         /// </summary>
 		public int Count => _nodes.Count;
 
@@ -25,7 +25,7 @@ namespace System.Collections.Generic
 		public bool IsReadOnly { get; } = false;
 
         /// <summary>
-        /// Возвращает или задает TreeNode<T> по указанному индексу в коллекции.
+        /// Возвращает или задает TreeNode по указанному индексу в коллекции.
         /// </summary>
         /// <param name="index">Индекс элемента в дереве</param>
         /// <returns>Элемент, расположенный по данному индексу</returns>

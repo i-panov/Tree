@@ -20,6 +20,13 @@ namespace System.Linq
             }
         }
 
+        /// <summary>
+        /// Разворачивает дерево в плоскую последовательность элементов.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="nodes"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
         public static IEnumerable<T> ToEnumerable<T>(this TreeNodeCollection<T> nodes, Func<TreeNode<T>, T> selector)
             => GetFlatten(nodes).Select(selector);
 
@@ -36,15 +43,27 @@ namespace System.Linq
             return GetNodesByLevel(level, lastNode.Children);
         }
 
-        public static TreeNodeCollection<T2> ToTree<T1, T2>(this IEnumerable<T1> items, Func<T1, int> getLevel, Func<T1, int, T2> selector)
+        /// <summary>
+        /// Превращает последовательность элементов в дерево,
+        /// применяя переданную функцию getLevel 
+        /// для получения уровня вложенности элемента в дереве
+        /// и функцию selector для преобразования элемента в нужный тип.
+        /// </summary>
+        /// <typeparam name="TIn"></typeparam>
+        /// <typeparam name="TOut"></typeparam>
+        /// <param name="items"></param>
+        /// <param name="getLevel"></param>
+        /// <param name="selector"></param>
+        /// <returns></returns>
+        public static TreeNodeCollection<TOut> ToTree<TIn, TOut>(this IEnumerable<TIn> items, Func<TIn, int> getLevel, Func<TIn, int, TOut> selector)
         {
-            var result = new TreeNodeCollection<T2>();
+            var result = new TreeNodeCollection<TOut>();
 
             foreach (var value in items)
             {
                 var level = getLevel(value);
-                var convertedValue = selector?.Invoke(value, level) ?? value;
-                var node = new TreeNode<T2>(convertedValue);
+                var convertedValue = selector(value, level);
+                var node = new TreeNode<TOut>(convertedValue);
                 var nodesByLevel = GetNodesByLevel(level, result);
 
                 nodesByLevel?.Add(node);

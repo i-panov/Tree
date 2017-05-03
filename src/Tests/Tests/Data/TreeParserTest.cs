@@ -11,9 +11,6 @@ namespace Tests.Data
 	[TestFixture]
 	public class TreeParserTest
 	{
-		[Test]
-		public void Test()
-		{
-		}
-	}
+        private DataProvider data = new DataProvider();
+    }
 }

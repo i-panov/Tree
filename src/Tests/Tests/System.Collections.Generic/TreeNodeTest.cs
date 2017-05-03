@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 using NUnit.Framework;
-
 using Tests.Data;
 
 
@@ -14,10 +13,5 @@ namespace Tests.System.Collections.Generic
 	public class TreeNodeTest
 	{
 		private DataProvider data = new DataProvider();
-
-		[Test]
-		public void Test()
-		{
-		}
 	}
 }
